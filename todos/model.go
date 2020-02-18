@@ -1,15 +1,19 @@
-package main
+package todos
 
-import "database/sql"
+import (
+	"database/sql"
+
+	"../lib"
+)
 
 type Todo struct {
-	ID            int    `json:"id" form:"id"`
-	Title         string `json:"title" form:"title"`
-	Stared        bool   `json:"stared" form:"stared"`
-	DeadlineStart Date   `json:"deadline_start" form:"deadline_start"`
-	DeadlineEnd   Date   `json:"deadline_end" form:"deadline_end"`
-	Comment       string `json:"comment" form:"comment"`
-	Completed     bool   `json:"completed" form:"completed"`
+	ID            int      `json:"id" form:"id"`
+	Title         string   `json:"title" form:"title"`
+	Stared        bool     `json:"stared" form:"stared"`
+	DeadlineStart lib.Date `json:"deadline_start" form:"deadline_start"`
+	DeadlineEnd   lib.Date `json:"deadline_end" form:"deadline_end"`
+	Comment       string   `json:"comment" form:"comment"`
+	Completed     bool     `json:"completed" form:"completed"`
 }
 
 type Todos []Todo
