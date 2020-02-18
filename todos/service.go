@@ -19,12 +19,6 @@ type todosService struct {
 	db *sql.DB
 }
 
-func NewTodosService(db *sql.DB) Service {
-	return &todosService{
-		db: db,
-	}
-}
-
 func (service *todosService) GetAll(context *gin.Context) {
 	todos := queryTodoTable(service.db)
 	context.JSON(http.StatusOK, todos)
