@@ -4,11 +4,9 @@
 
 ```shell
 # run
-$ export GOPATH=$(pwd):$GOPATH
 $ go run main.go middleware.go route.go
 
 #build
-$ export GOPATH=$(pwd):$GOPATH
 $ go build main.go middleware.go route.go
 ```
 
@@ -25,5 +23,10 @@ CREATE TABLE todos(
     deadline_end DATE,
     comment TEXT,
     completed Boolean NOT NULL
+);
+
+CREATE TABLE todo_sort(
+    todo_id int UNIQUE NOT NULL REFERENCES todos(id) ON DELETE CASCADE,
+    sort_index int UNIQUE NOT NULL
 );
 ```

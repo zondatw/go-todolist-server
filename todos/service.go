@@ -57,3 +57,22 @@ func (service *todosService) Delete(context *gin.Context) {
 	deleteTodo(service.db, id)
 	context.JSON(http.StatusNoContent, gin.H{})
 }
+
+type sortService struct {
+	db *sql.DB
+}
+
+func (service *sortService) Get(context *gin.Context) {
+	sort := getTodoSort(service.db)
+	context.JSON(http.StatusOK, sort)
+}
+
+func (service *sortService) Update(context *gin.Context) {
+	var sort []int
+	if err := context.ShouldBindJSON(&sort); err == nil {
+		newSort := updateTodoSort(service.db, sort)
+		context.JSON(http.StatusOK, newSort)
+	} else {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+}

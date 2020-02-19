@@ -8,6 +8,7 @@ import (
 
 func Route(api *gin.RouterGroup, db *sql.DB) {
 	todosService := todosService{db: db}
+	sortService := sortService{db: db}
 
 	todosRoute := api.Group("/todos")
 	{
@@ -16,5 +17,10 @@ func Route(api *gin.RouterGroup, db *sql.DB) {
 		todosRoute.GET("/:id", todosService.Get)
 		todosRoute.PUT("/:id", todosService.Update)
 		todosRoute.DELETE("/:id", todosService.Delete)
+	}
+	sortRoute := api.Group("/sort")
+	{
+		sortRoute.GET("/", sortService.Get)
+		sortRoute.PUT("/", sortService.Update)
 	}
 }
