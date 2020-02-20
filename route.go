@@ -1,6 +1,6 @@
 package main
 
-import "./todos"
+import "github.com/zondaTW/go-todolist-server/todos"
 
 func initRoute() {
 	router.Use(CORSMiddleware)

@@ -7,7 +7,7 @@
 $ go run main.go middleware.go route.go
 
 #build
-$ go build main.go middleware.go route.go
+$ go build
 ```
 
 ## Table schema

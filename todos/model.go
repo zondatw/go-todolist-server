@@ -3,7 +3,7 @@ package todos
 import (
 	"database/sql"
 
-	"../lib"
+	"github.com/zondaTW/go-todolist-server/lib"
 )
 
 type Todo struct {
