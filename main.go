@@ -28,25 +28,27 @@ func init() {
 func main() {
 	var err error
 	var (
-		host     = config.Section("Database").Key("host").String()
-		port     = config.Section("Database").Key("port").Value()
-		user     = config.Section("Database").Key("user").String()
-		password = config.Section("Database").Key("password").String()
-		dbname   = config.Section("Database").Key("dbname").String()
+		ip         = config.Section("System").Key("ip").String()
+		port       = config.Section("System").Key("port").String()
+		dbHost     = config.Section("Database").Key("host").String()
+		dbPort     = config.Section("Database").Key("port").Value()
+		dbUser     = config.Section("Database").Key("user").String()
+		dbPassword = config.Section("Database").Key("password").String()
+		dbName     = config.Section("Database").Key("dbname").String()
 	)
 
 	connectionString := fmt.Sprintf(
 		"host=%s port=%s "+
 			"user=%s password=%s "+
 			"dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+		dbHost, dbPort, dbUser, dbPassword, dbName)
 	db, err = sql.Open("postgres", connectionString)
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
 
+	urlSetting := fmt.Sprintf("%s:%s", ip, port)
 	router = gin.Default()
-	initRoute()
-	router.Run(":5000")
+	router.Run(urlSetting)
 }
