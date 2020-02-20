@@ -30,6 +30,7 @@ func main() {
 	var (
 		ip         = config.Section("System").Key("ip").String()
 		port       = config.Section("System").Key("port").String()
+		authKey    = config.Section("System").Key("auth_key").String()
 		dbHost     = config.Section("Database").Key("host").String()
 		dbPort     = config.Section("Database").Key("port").Value()
 		dbUser     = config.Section("Database").Key("user").String()
@@ -50,5 +51,6 @@ func main() {
 
 	urlSetting := fmt.Sprintf("%s:%s", ip, port)
 	router = gin.Default()
+	initRoute(authKey)
 	router.Run(urlSetting)
 }

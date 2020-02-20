@@ -4,7 +4,11 @@ import (
 	"database/sql/driver"
 	"fmt"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
+
+type AuthFunc func(*gin.Context) (interface{}, error)
 
 type Date time.Time
 

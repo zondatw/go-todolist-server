@@ -29,4 +29,10 @@ CREATE TABLE todo_sort(
     todo_id int UNIQUE NOT NULL REFERENCES todos(id) ON DELETE CASCADE,
     sort_index int UNIQUE NOT NULL
 );
+
+CREATE TABLE todo_user(
+    id serial PRIMARY KEY,
+    username VARCHAR (80) NOT NULL,
+    password VARCHAR (80) NOT NULL
+);
 ```
