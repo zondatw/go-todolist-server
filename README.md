@@ -1,5 +1,23 @@
 # Todolist server
 
+## Setup
+
+Create env.ini file:  
+
+```ini
+[System]
+ip = 0.0.0.0
+port = 5000
+auth_key = secret key
+
+[Database]
+host = test_postgres
+port = 5432
+user = postgres
+password = password
+dbname = todo_database
+```
+
 ## Run
 
 ```shell
@@ -39,7 +57,7 @@ CREATE TABLE todo_user(
 
 ## Docker
 
-Modify the host value to test_postgres which section is Database on env.ini file.
+Modify the host value to test_postgres which section is Database on env.ini file.  
 
 ```shell
 # db
