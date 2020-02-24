@@ -1,5 +1,6 @@
 FROM golang:1.13-alpine
 
+WORKDIR /go/app
 ADD . .
 
 # fix $GOPATH/go.mod exists but should not
