@@ -36,3 +36,16 @@ CREATE TABLE todo_user(
     password VARCHAR (80) NOT NULL
 );
 ```
+
+## Docker
+
+Modify the host value to test_postgres which section is Database on env.ini file.
+
+```shell
+# db
+$ docker run --name test_postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
+
+# build and run
+$ docker build -t go-todolist-server .
+$ docker run --name go-todolist-server -p 5000:5000 --link test_postgres:test_postgres -d go-todolist-server
+```
