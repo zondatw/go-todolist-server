@@ -8,7 +8,7 @@ Create .env file:
 SYSTEM_IP=0.0.0.0
 SYSTEM_PORT=5000
 SYSTEM_AUTH_KEY=secret key
-DB_HOST=db
+DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_USER=postgres
 DB_PASSWORD=password
@@ -19,7 +19,7 @@ DB_NAME=todo_database
 
 ```shell
 # run
-$ go run main.go middleware.go route.go
+$ go run main.go route.go
 
 #build
 $ go build
@@ -47,7 +47,7 @@ CREATE TABLE todo_sort(
 
 CREATE TABLE todo_user(
     id serial PRIMARY KEY,
-    username VARCHAR (80) NOT NULL,
+    username VARCHAR (80) UNIQUE NOT NULL,
     password VARCHAR (80) NOT NULL
 );
 ```

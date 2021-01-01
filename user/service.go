@@ -2,6 +2,7 @@ package user
 
 import (
 	"database/sql"
+	"net/http"
 
 	jwt "github.com/appleboy/gin-jwt"
 	"github.com/gin-gonic/gin"
@@ -15,9 +16,9 @@ type Login struct {
 }
 
 func GetJWTAuthFunc(db *sql.DB) lib.AuthFunc {
-	return func(c *gin.Context) (interface{}, error) {
+	return func(context *gin.Context) (interface{}, error) {
 		var login Login
-		if err := c.ShouldBind(&login); err != nil {
+		if err := context.ShouldBind(&login); err != nil {
 			return "", jwt.ErrMissingLoginValues
 		}
 
@@ -26,5 +27,21 @@ func GetJWTAuthFunc(db *sql.DB) lib.AuthFunc {
 		}
 
 		return nil, jwt.ErrFailedAuthentication
+	}
+}
+
+func AddUser(db *sql.DB) func(c *gin.Context) {
+	return func(context *gin.Context) {
+		var login Login
+		var user User
+		if err := context.ShouldBind(&login); err == nil {
+			user, err = addUser(db, login.Username, login.Password)
+			if err != nil {
+				panic(err)
+			}
+			context.JSON(http.StatusOK, user)
+		} else {
+			context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		}
 	}
 }

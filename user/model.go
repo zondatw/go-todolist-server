@@ -25,3 +25,25 @@ func getUser(db *sql.DB, username string, password string) (User, error) {
 	}
 	return user, nil
 }
+
+func addUser(db *sql.DB, username string, password string) (User, error) {
+	var user User
+	sqlStatement := `INSERT INTO todo_user (username, password)
+		VALUES ($1, $2)
+		RETURNING id, username, password;
+	`
+
+	err := db.QueryRow(
+		sqlStatement, username, password,
+	).Scan(
+		&user.ID, &user.Username, &user.Password,
+	)
+	if err != nil {
+		return User{
+			ID:       0,
+			Username: "",
+			Password: "",
+		}, err
+	}
+	return user, nil
+}
