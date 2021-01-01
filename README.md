@@ -62,5 +62,5 @@ $ docker run --name test_postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d
 
 # build and run
 $ docker build -t go-todolist-server .
-$ docker run --name go-todolist-server -p 5000:5000 --link test_postgres:test_postgres -e SYSTEM_IP=0.0.0.0 -e SYSTEM_PORT=5000 -e SYSTEM_AUTH_KEY=secretkey -e DB_HOST=db -e DB_PORT=5432 -e DB_USER=postgres -e DB_PASSWORD=password -e DB_NAME=todo_database -d go-todolist-server
+$ docker run --name go-todolist-server -p 5000:5000 --link test_postgres:test_postgres -e SYSTEM_IP=0.0.0.0 -e SYSTEM_PORT=5000 -e SYSTEM_AUTH_KEY=secretkey -e DB_HOST=test_postgres -e DB_PORT=5432 -e DB_USER=postgres -e DB_PASSWORD=password -e DB_NAME=todo_database -d go-todolist-server
 ```
