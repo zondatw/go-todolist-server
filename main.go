@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-ini/ini"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
@@ -17,25 +18,20 @@ var (
 )
 
 func init() {
-	var err error
-	config, err = ini.Load("env.ini")
-	if err != nil {
-		fmt.Printf("Fail to read file: %v", err)
-		os.Exit(1)
-	}
+	godotenv.Load(".env")
 }
 
 func main() {
 	var err error
 	var (
-		ip         = config.Section("System").Key("ip").String()
-		port       = config.Section("System").Key("port").String()
-		authKey    = config.Section("System").Key("auth_key").String()
-		dbHost     = config.Section("Database").Key("host").String()
-		dbPort     = config.Section("Database").Key("port").Value()
-		dbUser     = config.Section("Database").Key("user").String()
-		dbPassword = config.Section("Database").Key("password").String()
-		dbName     = config.Section("Database").Key("dbname").String()
+		ip         = os.Getenv("SYSTEM_IP")
+		port       = os.Getenv("SYSTEM_PORT")
+		authKey    = os.Getenv("SYSTEM_AUTH_KEY")
+		dbHost     = os.Getenv("DB_HOST")
+		dbPort     = os.Getenv("DB_PORT")
+		dbUser     = os.Getenv("DB_USER")
+		dbPassword = os.Getenv("DB_PASSWORD")
+		dbName     = os.Getenv("DB_NAME")
 	)
 
 	connectionString := fmt.Sprintf(

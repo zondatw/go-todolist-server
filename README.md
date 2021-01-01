@@ -2,20 +2,17 @@
 
 ## Setup
 
-Create env.ini file:  
+Create .env file:  
 
 ```ini
-[System]
-ip = 0.0.0.0
-port = 5000
-auth_key = secret key
-
-[Database]
-host = test_postgres
-port = 5432
-user = postgres
-password = password
-dbname = todo_database
+SYSTEM_IP=0.0.0.0
+SYSTEM_PORT=5000
+SYSTEM_AUTH_KEY=secret key
+DB_HOST=db
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=password
+DB_NAME=todo_database
 ```
 
 ## Run
