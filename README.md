@@ -58,7 +58,7 @@ Modify the host value to test_postgres which section is Database on env.ini file
 
 ```shell
 # db
-$ docker run --name test_postgres -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
+$ docker run --name test_postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=todo_database -d postgres
 
 # build and run
 $ docker build -t go-todolist-server .
