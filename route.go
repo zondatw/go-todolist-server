@@ -10,8 +10,9 @@ func initRoute(authKey string) {
 	router.Use(middleware.CORSMiddleware)
 
 	jwtMiddleware := middleware.GetJWTMiddleware(authKey, user.GetJWTAuthFunc(db))
-	router.POST("/login", jwtMiddleware.LoginHandler)
-	router.POST("/register", user.AddUser(db))
+	userRouter := router.Group("/user")
+	userRouter.POST("/login", jwtMiddleware.LoginHandler)
+	userRouter.POST("/register", user.AddUser(db))
 
 	auth := router.Group("/auth")
 	auth.Use(jwtMiddleware.MiddlewareFunc())
