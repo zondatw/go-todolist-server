@@ -70,3 +70,23 @@ func TestGetTodo(t *testing.T) {
 	newTodo := getTodo(db, "1")
 	assert.Equal(t, newTodo, todo, "they should be equal")
 }
+
+func TestGetTodoSort(t *testing.T) {
+	db, mock, err := sqlmock.New()
+	if err != nil {
+		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
+	}
+	defer db.Close()
+
+	todoSortMockRows := sqlmock.NewRows([]string{"todo_id"}).
+		AddRow(1).
+		AddRow(2)
+
+	mock.ExpectQuery("SELECT todo_id from todo_sort ORDER BY sort_index ASC").
+		WillReturnRows(todoSortMockRows)
+
+	todoSort := []int{1, 2}
+
+	newTodoSort := getTodoSort(db)
+	assert.Equal(t, newTodoSort, todoSort, "they should be equal")
+}
