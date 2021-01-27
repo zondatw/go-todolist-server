@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -47,6 +48,12 @@ func main() {
 
 	urlSetting := fmt.Sprintf("%s:%s", ip, port)
 	router = gin.Default()
+	router.GET("/", health)
+	router.GET("/health", health)
 	initRoute(authKey)
 	router.Run(urlSetting)
+}
+
+func health(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"status": "OK"})
 }
