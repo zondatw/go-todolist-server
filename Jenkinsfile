@@ -12,12 +12,12 @@ pipeline {
         stage('Compile') {
             steps {
                 sh 'go mod download'
-                sh 'go build'
+                sh 'make build'
             }
         }
         stage('Test') {
             steps {
-                sh 'go test -cover ./...'
+                sh 'make test'
             }
         }
     }
