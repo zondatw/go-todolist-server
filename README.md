@@ -25,6 +25,15 @@ $ go run main.go route.go
 $ go build
 ```
 
+or use makefile
+
+```shell
+$ make
+
+#clean
+$ make clean
+```
+
 ## Table schema
 
 ![schema](schema.PNG)  
